@@ -1,0 +1,44 @@
+spring:
+  cloud:
+    config:
+      override-none: true
+  application:
+    name: zuul
+
+server:
+  port: 3001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
+
+zuul:
+  retryable: true
+  #zuul 会过滤敏感 http 协议头，默认过滤以下协议头：
+  #可以设置 zuul 不过滤这些协议头
+  sensitive-headers:
+    Authorization
+    Cookie
+    Set-Cookie
+
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 2000
+  MaxAutoRetriesNextServer: 1
+  MaxAutoRetries: 1
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 500
+#暴露 hystrix.stream 监控端点
+#zuul 已经包含 actuator 依赖
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

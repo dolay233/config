@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      override-none: true
+  application:
+    name: item-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka
+
+server:
+  port: 8001
