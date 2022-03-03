@@ -4,6 +4,11 @@ spring:
       override-none: true
   application:
     name: item-service
+  rabbitmq:
+    host: 192.168.126.131
+    port: 15672
+    username: admin
+    password: admin
 eureka:
   client:
     service-url:
